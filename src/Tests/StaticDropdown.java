@@ -1,0 +1,36 @@
+package Tests;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class StaticDropdown {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+		
+		WebElement ele=driver.findElement(By.id("ctl00_mainContent_DropDownListCurrency"));
+		//dropdown with select class
+		Select dropdown=new Select(ele);
+		dropdown.selectByIndex(1);
+		String inr=dropdown.getFirstSelectedOption().getText();
+		System.out.print(inr);
+		dropdown.selectByVisibleText("AED");
+		String aed=dropdown.getFirstSelectedOption().getText();
+		System.out.print(aed);
+		dropdown.selectByValue("USD");
+		String usd=dropdown.getFirstSelectedOption().getText();
+		System.out.print(usd);
+		driver.close();
+	}
+
+}
